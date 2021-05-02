@@ -1,7 +1,7 @@
 // Create a map object
 var myMap = L.map("mapid", {
     center: [15.5994, -28.6731],
-    zoom: 3
+    zoom: 4
   });
 
   // Create the tile layer that will be the background of our map
@@ -31,7 +31,7 @@ d3.json(usgs_url).then(function(data){
     } else if (magnitude > 2){
         return 'green'
     } else if (magnitude > 1){
-        return 'blue'
+        return 'lightblue'
     } else {
         return 'purple'
     }
@@ -68,6 +68,26 @@ d3.json(usgs_url).then(function(data){
 
   earthquakes.addTo(myMap);
 
+  // Set up the legend
+  var legend = L.control({ position: "bottomright" });
+
+  legend.onAdd = function() {
+    var div = L.DomUtil.create("div", "info legend");
+    magnitude = [0, 1, 2, 3, 4, 5];
+    colors = [];
+
+    // Adding the range for colors and magnitude
+    div.innerHTML += "<h4 style='margin:4px'>Range</h4>"
+
+    for (var i = 0; i < magnitude.length; i++) {
+        div.innerHTML += "<i style='background: " + color(magnitude[i] +1) + "'></i> " +
+          magnitude[i] + ( magnitude[i + 1] ? "&ndash;" + magnitude[i + 1] + "<br>" : "+");
+      }
+      return div;
+  };
+
+  // Adding legend to the map
+  legend.addTo(myMap);
 
 });
 
