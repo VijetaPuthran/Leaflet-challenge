@@ -8,7 +8,7 @@ The task involved is to build new set of tools that will allow them to visualize
 
 ### Level 1: Basic Visualization
 
-![Level1]()
+![Level1](Images/Step1.jpg)
 
 The first task is to visualize an earthquake data set. The USGS provides earthquake data in a number of different formats, updated every 5 minutes. The dataset was obtained in the [USGS GeoJSON Feed](http://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) page, for visualization. When the dataset is selected, it will give a JSON representation of that data. The URL of this JSON is used to pull the data for our visualizaion. The 'then' method is used for the promise to retrieve the data with D3.
 
@@ -16,6 +16,6 @@ A map is created using Leaflet that plots all of the earthquakes from your data 
 
 ### Level 2 : More Data
 
-![Level2]()
+![Level2](Images/Step2.jpg)
 
 The second plot includes the second data set on the map to illustrate the relationship between tectonic plates and seismic activity. The second data set is pulled in and visualized along side the original set of data. Data on tectonic plates was found at found at, <https://github.com/fraxen/tectonicplates>. The base maps are added to choose from as well as separate out the two different data sets into overlays that can be turned on and off independently. The layer controls is also added to the map.
