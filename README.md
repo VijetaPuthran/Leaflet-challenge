@@ -14,7 +14,7 @@ The first task is to visualize an earthquake data set. The USGS provides earthqu
 
 A map is created using Leaflet that plots all of the earthquakes from your data set based on their longitude and latitude. The data markers reflect the magnitude of the earthquake by their size and depth of the earth quake by color. Earthquakes with higher magnitudes appear larger and earthquakes with greater depth appear darker in color. The popups are included that provide additional information about the earthquake when a marker is clicked. A legend is created that will provide context for the map data. 
 
-### Level 2 : More Data
+### Level 2: More Data
 
 ![Level2](Images/Step2.jpg)
 
