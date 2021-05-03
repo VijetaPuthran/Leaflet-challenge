@@ -17,3 +17,5 @@ A map is created using Leaflet that plots all of the earthquakes from your data 
 ### Level 2 : More Data
 
 ![Level2]()
+
+The second plot includes the second data set on the map to illustrate the relationship between tectonic plates and seismic activity. The second data set is pulled in and visualized along side the original set of data. Data on tectonic plates was found at found at, <https://github.com/fraxen/tectonicplates>. The base maps are added to choose from as well as separate out the two different data sets into overlays that can be turned on and off independently. The layer controls is also added to the map.
