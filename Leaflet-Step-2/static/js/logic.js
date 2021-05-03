@@ -28,7 +28,7 @@ var usgs_url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_mo
             },
 
             onEachFeature: function(feature, layer){
-                layer.bindPopup('<h3>' + feature.properties.place + '<h3><hr><p>' +
+                layer.bindPopup('<h3>' + "Place: "+ feature.properties.place + '<h3><hr><p>' + "Date/Time: "+
                 new Date(feature.properties.time) + '</p>');
             }
 

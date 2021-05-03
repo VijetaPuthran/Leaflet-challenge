@@ -65,7 +65,7 @@ d3.json(usgs_url).then(function(data){
     },
     style: style,
     onEachFeature: function(feature, layer) {
-      layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
+      layer.bindPopup('<h3>'+"Magnitude: " + feature.properties.mag + '</h3><hr><h3>'+ "Location: " + feature.properties.place+ '<h3>');
     }
 
   }).addTo(earthquakes);
