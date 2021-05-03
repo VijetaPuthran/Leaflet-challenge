@@ -1,3 +1,71 @@
+//Link used to grab the monthly earthquake data from usgs.
+var usgs_url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson';
+
+//Creating a function to set the size of marker
+    function markerSize(magnitude){
+        return magnitude * 5;
+    };
+
+//Variable to hold the layers into a group
+    var group = new L.LayerGroup();
+//Using promise with the usage of 'then' method to extract data
+    d3.json(usgs_url).then(function(data){
+        L.geoJSON(data.features, {
+            // convert point feature to map layer 
+            pointToLayer: function(feature, coord){
+                return L.circleMarker(coord, {
+                    radius: markerSize(feature.properties.mag)
+                });
+            },
+            style: function(dataFeature){
+                return {
+                    fillColor: color(dataFeature.properties.mag),
+                    fillOpacity: 0.5,
+                    weight: 0.1,
+                    color: 'black'
+                }
+            },
+
+            onEachFeature: function(feature, layer){
+                layer.bindPopup('<h3>' + feature.properties.place + '<h3><hr><p>' +
+                new Date(feature.properties.time) + '</p>');
+            }
+
+        }).addTo(group);
+        dataMap(group); 
+    });
+//Link to get the data on tectonic plates
+var tect_plate = 'https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json';
+//Creating a new layer for the boundary
+var boundary = new L.LayerGroup();
+//Using promise with the usage of 'then' method to extract data
+d3.json(tect_plate).then(function(data){
+    //console.log(data)
+    L.geoJSON(data.features, {
+        style: function (geoJsonFeature){
+            return{
+                weight: 3,
+                color: 'orange'
+            }
+        },
+    }).addTo(boundary);
+})
+//Creating function for color scale based on magnitude
+function color(magnitude){
+    if (magnitude > 5){
+        return 'red'
+    } else if (magnitude > 4){
+        return 'orange'
+    } else if (magnitude > 3){
+        return 'yellow'
+    } else if (magnitude > 2){
+        return 'green'
+    } else if (magnitude > 1){
+        return 'lightblue'
+    } else {
+        return 'purple'
+    }
+};
 //Creating the function for map with base and other layers
 function dataMap(){
     var streetmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
@@ -28,14 +96,14 @@ function dataMap(){
     };
 
     var overlayMaps = {
-        "Earthquakes": allData,
+        "Earthquakes": group,
         'Fault Line': boundary
     };
 
     var myMap = L.map('mapid', {
         center: [15.5994, -28.6731],
         zoom: 4,
-        layers: [streetmap, allData, lightmap, satellite, boundary]
+        layers: [streetmap, group, lightmap, satellite, boundary]
     });
 
     L.control.layers(baseMaps, overlayMaps, {

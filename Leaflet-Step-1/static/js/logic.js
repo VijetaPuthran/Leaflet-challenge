@@ -25,7 +25,7 @@ d3.json(usgs_url).then(function(data){
     
 //Creating function for color scale based on magnitude
   function color(magnitude){
-    // console.log(magnitude)
+
     if (magnitude > 5){
         return 'red'
     } else if (magnitude > 4){
