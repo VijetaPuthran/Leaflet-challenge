@@ -13,8 +13,8 @@ var usgs_url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_mo
     d3.json(usgs_url).then(function(data){
         L.geoJSON(data.features, {
             // convert point feature to map layer 
-            pointToLayer: function(feature, coord){
-                return L.circleMarker(coord, {
+            pointToLayer: function(feature, latlng){
+                return L.circleMarker(latlng, {
                     radius: markerSize(feature.properties.mag)
                 });
             },
